@@ -1,0 +1,10 @@
+dependencies:
+  flutter:
+    sdk: flutter
+  pdf: ^3.10.4  # Replace with your forked version
+  path_provider: ^2.1.1
+  open_file: ^3.3.2
+
+flutter:
+  assets:
+    - assets/fonts/
