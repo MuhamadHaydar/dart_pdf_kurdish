@@ -18,7 +18,20 @@
 /// Arabic Substition A
 const Map<int, dynamic> _arabicSubstitionA = <int, dynamic>{
   0x0640: <int>[0x0640, 0x0640, 0x0640, 0x0640], // ARABIC TATWEEL
-
+    // Kurdish letter ێ (U+06CE) - ARABIC LETTER YEH WITH SMALL V
+  0x06CE: <int>[0xFBFC, 0xFBFD, 0xFBFE, 0xFBFF], // Using Farsi Yeh shape codes
+  
+  // Kurdish letter ڵ (U+06B5) - ARABIC LETTER LAM WITH SMALL V
+  0x06B5: <int>[0xFB90, 0xFB91, 0xFB92, 0xFB93], 
+  
+  // Kurdish letter ە (U+06D5) - ARABIC LETTER AE
+  0x06D5: <int>[0xFEE9, 0xFEEA, 0xFEEB, 0xFEEC], // Using Heh shape codes
+  
+  // Kurdish letter ۆ (U+06C6) - ARABIC LETTER OE
+  0x06C6: <int>[0xFBD9, 0xFBDA],
+  
+  // Kurdish letter ڕ (U+0695) - ARABIC LETTER REH WITH SMALL V BELOW
+  0x0695: <int>[0xFB8C, 0xFB8D], 
   0x0621: <int>[1569], // ARABIC LETTER HAMZA
   0x0622: <int>[1570, 0xFE82], // ARABIC LETTER ALEF WITH MADDA ABOVE
   0x0623: <int>[1571, 0xFE84], // ARABIC LETTER ALEF WITH HAMZA ABOVE
