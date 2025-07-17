@@ -381,6 +381,7 @@ class TtfParser {
     }
   }
 
+
   /// https://developer.apple.com/fonts/TrueType-Reference-Manual/RM06/Chap6glyf.html
   void _parseGlyphs() {
     final baseOffset = tableOffsets[glyf_table]!;

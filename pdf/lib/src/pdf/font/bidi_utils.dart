@@ -1,20 +1,5 @@
 import 'package:bidi/bidi.dart' as bidi;
-/*
- * Copyright (C) 2017, David PHAM-VAN <dev.nfet.net@gmail.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+import 'kurdish.dart';
 const Map<int, int> _arabicDiacritics = <int, int>{
   0x064B: 0x064B, // Fathatan
   0x064C: 0x064C, // Dammatan
@@ -31,13 +16,11 @@ const Map<int, int> _arabicDiacritics = <int, int>{
   0xFC61: 0xFC61, // Shadda + Damma
   0xFC62: 0xFC62, // Shadda + Kasra
   0xFC63: 0xFC63, // Shadda + Dagger alif
-  // 1548: 1548,
+// 1548: 1548,
 };
-
 bool isArabicDiacriticValue(int letter) {
   return _arabicDiacritics.containsValue(letter);
 }
-
 /// Arabic characters that have different unicode values
 /// but should point to the same glyph.
 const Map<int, int> basicToIsolatedMappings = {
@@ -77,9 +60,8 @@ const Map<int, int> basicToIsolatedMappings = {
   0x0626: 0xFE89, // ئ
   0x0629: 0xFE93, // ة
 };
-
-/// Applies THE BIDIRECTIONAL ALGORITHM using (https://pub.dev/packages/bidi)
-String logicalToVisual(String input) {
+// Original implementation before Kurdish support
+String _originalLogicalToVisual(String input) {
   final buffer = StringBuffer();
   final paragraphs = bidi.BidiString.fromLogical(input).paragraphs;
   for (final paragraph in paragraphs) {
@@ -92,4 +74,16 @@ String logicalToVisual(String input) {
     }
   }
   return buffer.toString();
+}
+/// Applies THE BIDIRECTIONAL ALGORITHM using (https://pub.dev/packages/bidi)
+String logicalToVisual(String input) {
+// Check if text contains Kurdish characters
+  if (input.codeUnits.any(PdfKurdish.isKurdishChar)) {
+// First apply standard Arabic processing
+    final arabicProcessed = _originalLogicalToVisual(input);
+// Then apply Kurdish-specific processing
+    return PdfKurdish.processText(arabicProcessed);
+  }
+// Use standard processing for non-Kurdish text
+  return _originalLogicalToVisual(input);
 }
